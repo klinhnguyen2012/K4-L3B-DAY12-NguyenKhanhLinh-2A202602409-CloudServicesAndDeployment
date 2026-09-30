@@ -23,6 +23,14 @@ class TestAuthentication:
         )
         assert response.status_code == 401
 
+    def test_key_co_dau_sai_thi_401_khong_500(self, client):
+        response = client.post(
+            "/ask",
+            json={"question": "Xin chào"},
+            headers={"X-API-Key": "KEY_MỚI".encode("utf-8")},
+        )
+        assert response.status_code == 401
+
     def test_dung_key_thi_200(self, client, auth_headers):
         response = client.post(
             "/ask", json={"question": "Docker là gì?"}, headers=auth_headers
